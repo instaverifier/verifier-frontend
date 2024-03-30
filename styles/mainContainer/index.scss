@@ -1,0 +1,80 @@
+.mainContainerBox {
+  margin: 3.5rem 1.25rem;
+}
+.searchDataSectionMainContainer {
+  .search_heading {
+    font-size: 2.75rem;
+  }
+  .subHeading_div {
+    margin-top: 20px;
+    max-width: 30rem;
+    span {
+      color: var(--gm-color-caption, rgb(95, 99, 104));
+      font-size: 1.125rem;
+    }
+  }
+  .search_button_section {
+    margin-top: 3.5rem;
+    .search_input_box {
+      max-width: 400px !important;
+      margin-right: 20px;
+      border: 1px solid black;
+    }
+  }
+}
+.login_signup_modal_main_container {
+  .ant-modal-title {
+    font-size: 1.5rem !important;
+  }
+  .login_form_main_container{
+    .ant-form-item-required{
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .highlighted_text{
+      color: blue !important;
+      text-decoration: underline;
+    }
+  }
+}
+.resultSection_main_container {
+  border: 1px solid rgb(230, 220, 220);
+  padding: 1.25rem;
+  border-radius: 12px;
+  @media screen and (max-width:767px){
+    margin-top: 20px;
+  }
+  .company_info_row {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgb(230, 220, 220);
+    .company_title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-top: 25px !important;
+    }
+    .company_desc {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-top: 20px !important;
+    }
+  }
+  .details_sections {
+    margin-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgb(230, 220, 220);
+    .title {
+      font-size: 1rem;
+      color: rgb(131, 125, 125);
+    }
+    .desc {
+      font-size: 1rem;
+    }
+  }
+  .customer_reviews_main_container{
+    .customer_reviews{
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-top: 25px !important;
+    }
+  }
+}
