@@ -3,7 +3,7 @@ import React from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { customer_reviews_mock, items } from "../../constant";
 
-const ResultSection = () => {
+const ResultSection = ({ data }) => {
   return (
     <div className="resultSection_main_container">
       <Row className="company_info_row">
@@ -11,10 +11,22 @@ const ResultSection = () => {
           <Avatar icon={<UserOutlined />} size={"large"} />
         </Col>
         <Col span={24} className="mt-10">
-          <span className="company_title">Amazon</span>
+          <span
+            className={
+              data ? "company_title" : "company_title filter_blur_effect"
+            }
+          >
+            {data ? data?.cmp_name : "xxxx"}
+          </span>
         </Col>
         <Col span={24} className="mt-8">
-          <span className="company_desc">Huda City Center, Gurugram</span>
+          <span
+            className={
+              data ? "company_desc" : "company_desc filter_blur_effect"
+            }
+          >
+            {data ? data?.cmp_address : "No address found"}
+          </span>
         </Col>
       </Row>
       <div className="details_sections">
@@ -24,54 +36,69 @@ const ResultSection = () => {
               <Col xs={6} className="title">
                 Company Name
               </Col>
-              <Col xs={18} className="desc">
-                Amazon
+              <Col
+                xs={18}
+                className={data ? "desc" : "desc filter_blur_effect"}
+              >
+                {data ? data?.cmp_name : "xxxxx"}
               </Col>
             </Row>
             <Row className="mt-20">
               <Col xs={6} className="title">
                 GST Number
               </Col>
-              <Col xs={18} className="desc">
-                345AFR6688DD2
-              </Col>
-            </Row>
-            <Row className="mt-20">
-              <Col xs={6} className="title">
-                Owner Name
-              </Col>
-              <Col xs={18} className="desc">
-                Jeff Bezos
-              </Col>
-            </Row>
-            <Row className="mt-20">
-              <Col xs={6} className="title">
-                Email
-              </Col>
-              <Col xs={18} className="desc">
-                amazon@gmail.com
+              <Col
+                xs={18}
+                className={data ? "desc" : "desc filter_blur_effect"}
+              >
+                {data ? data?.gst_no : "xxxxx"}
               </Col>
             </Row>
             <Row className="mt-20">
               <Col xs={6} className="title">
                 Contact
               </Col>
-              <Col xs={18} className="desc">
-                +91 8899336688
+              <Col
+                xs={18}
+                className={data ? "desc" : "desc filter_blur_effect"}
+              >
+                {data ? data?.mobile : "xxxxxxxx"}
               </Col>
             </Row>
             <Row className="mt-20">
+              <Col xs={6} className="title">
+                Total Amount
+              </Col>
+              <Col
+                xs={18}
+                className={data ? "desc" : "desc filter_blur_effect"}
+              >
+                {data ? data?.total_amount : "xxx"}
+              </Col>
+            </Row>
+            <Row className="mt-20">
+              <Col xs={6} className="title">
+                Total Reports
+              </Col>
+              <Col
+                xs={18}
+                className={data ? "desc" : "desc filter_blur_effect"}
+              >
+                {data ? data?.total_reports : "xxxx"}
+              </Col>
+            </Row>
+            {/* <Row className="mt-20">
               <Col xs={6} className="title">
                 Overall Rating
               </Col>
               <Col xs={18} className="desc">
                 <Rate allowHalf defaultValue={3.5} />
               </Col>
-            </Row>
+            </Row> */}
           </Col>
         </Row>
       </div>
-      <div className="customer_reviews_main_container">
+      {/* <div className="customer_reviews_main_container">
         <Row>
           <Col xs={24} className="customer_reviews">
             Customer Reviews
@@ -83,7 +110,7 @@ const ResultSection = () => {
             <Collapse items={items} defaultActiveKey={["1"]} />
           </Col>
         </Row>
-      </div>
+      </div> */}
     </div>
   );
 };

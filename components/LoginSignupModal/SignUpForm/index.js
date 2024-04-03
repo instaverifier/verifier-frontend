@@ -41,6 +41,7 @@ const SignUpform = ({ onSignUpFinish, setCurrentForm }) => {
             <Input
               className="input_field"
               placeholder="Enter your mobile number"
+              maxLength={10}
             />
           </Form.Item>
         </Col>
