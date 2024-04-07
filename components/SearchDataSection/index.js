@@ -5,23 +5,13 @@ import Cookies from "js-cookie";
 import React, { useEffect, useRef, useState } from "react";
 
 const SearchDataSection = ({ setData }) => {
-  const [isLogin, setIsLogin] = useState(false);
+  // const [isLogin, setIsLogin] = useState(false);
   const [loading, setLoading] = useState(false);
   const gstRef = useRef();
-  useEffect(() => {
-    // Check if session key exists in cookies
-    const sessionKey = Cookies.get("sessionKey");
-
-    if (sessionKey) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, [Cookies.get("sessionKey")]);
 
   const handleSearch = async () => {
     setLoading(true);
-    if (!isLogin) {
+    if (localStorage.getItem("userLogin") !== "true") {
       message.error("Please login first!");
       setLoading(false);
       return;

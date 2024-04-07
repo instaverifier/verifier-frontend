@@ -22,6 +22,7 @@ const LoginSignUpModal = ({ loginModalOpen, setLoginModalOpen }) => {
 
       // Store the session key in a cookie with expiry of 30 days
       Cookies.set("sessionKey", sessionKey, { expires: 30 });
+      localStorage.setItem("userLogin", "true");
       message.success("Log in successfully!");
       handleCancel();
     } catch (error) {
@@ -39,9 +40,11 @@ const LoginSignUpModal = ({ loginModalOpen, setLoginModalOpen }) => {
       );
 
       const sessionKey = response?.data?.data?.session_key;
+      localStorage.setItem("userLogin", true);
 
       // Store the session key in a cookie with expiry of 30 days
       Cookies.set("sessionKey", sessionKey, { expires: 30 });
+
       message.success("Sign up successfully!");
       handleCancel();
     } catch (error) {
