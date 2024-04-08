@@ -1,11 +1,14 @@
-import { Button, Col, Form, Input, Modal, Row, message } from "antd";
+import { Button, Col, Divider, Form, Input, Modal, Row, message } from "antd";
+import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useState } from "react";
 
 const ReportModal = ({ reportOpen, setReportOpen }) => {
   const [loading, setLoading] = useState(false);
+  const [form] = useForm();
   const handleCancel = () => {
+    form.resetFields();
     setReportOpen(false);
   };
   const handleFinish = async (values) => {
@@ -42,6 +45,11 @@ const ReportModal = ({ reportOpen, setReportOpen }) => {
       onCancel={handleCancel}
       footer={null}
     >
+      <p style={{ marginBottom: "10px" }}>
+        We encourage responsible reporting as users are solely responsible for
+        their actions.
+      </p>
+      <Divider />
       <Form
         layout="vertical"
         requiredMark={false}
@@ -49,6 +57,7 @@ const ReportModal = ({ reportOpen, setReportOpen }) => {
         onFinish={handleFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
+        form={form}
       >
         <Row>
           <Col xs={24}>

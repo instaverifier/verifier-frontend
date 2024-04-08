@@ -44,18 +44,17 @@ const SearchDataSection = ({ setData }) => {
       <Row>
         <Col xs={24}>
           <span className="search_heading">
-            Video calls and meetings for everyone
+            {`Build trust here and earn on your chair`}
           </span>
           <div className="subHeading_div">
             <span>
-              Google Meet provides secure, easy-to-use video calls and meetings
-              for everyone, on any device.
+              {`We provide customer history as reported by others, aiming to offer transparency without intending to disparage anyone's reputation.`}
             </span>
           </div>
           <div className="d-flex  search_button_section">
             <Input
               className="search_input_box"
-              placeholder="Enter GST number"
+              placeholder="Enter GST or Mobile Number"
               ref={gstRef}
             />
             <Button

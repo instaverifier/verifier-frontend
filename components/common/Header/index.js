@@ -5,6 +5,8 @@ import LoginSignUpModal from "../../LoginSignupModal";
 import Cookies from "js-cookie";
 import ReportModal from "../../ReportModal";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Logo from "../../../public/logo.png";
 
 const Header = () => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -22,7 +24,7 @@ const Header = () => {
     } else {
       setIsLogin(false);
     }
-  }, [localStorage.getItem("userLogin")]);
+  }, []);
   const handleLogout = () => {
     Cookies.remove("sessionKey");
     localStorage.clear();
@@ -40,8 +42,9 @@ const Header = () => {
         setLoginModalOpen={setLoginModalOpen}
       />
       <Row className="header_main_container">
-        <Col xs={12} md={8}>
+        <Col xs={12} md={8} className="d-flex align-center">
           {/* <span>LOGO</span> */}
+          <Image src={Logo} alt="img" height={50} width={100} />
           <span className="heading">Trust Checker</span>
         </Col>
         <Col xs={12} md={16} className="d-flex justify-end">

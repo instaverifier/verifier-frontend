@@ -2,7 +2,8 @@ import { Avatar, Col, Collapse, Rate, Row } from "antd";
 import React from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { customer_reviews_mock, items } from "../../constant";
-
+import Image from "next/image";
+import Check from "../../public/check.webp";
 const ResultSection = ({ data }) => {
   return (
     <div className="resultSection_main_container">
@@ -10,7 +11,7 @@ const ResultSection = ({ data }) => {
         <Col span={24}>
           <Avatar icon={<UserOutlined />} size={"large"} />
         </Col>
-        <Col span={24} className="mt-10">
+        <Col span={24} className="mt-10 d-flex align-center">
           <span
             className={
               data ? "company_title" : "company_title filter_blur_effect"
@@ -18,6 +19,15 @@ const ResultSection = ({ data }) => {
           >
             {data ? data?.cmp_name : "xxxx"}
           </span>
+          {data?.total_amount === 0 ? (
+            <Image
+              style={{ marginLeft: "5px" }}
+              src={Check}
+              alt="umg"
+              height={25}
+              width={25}
+            />
+          ) : null}
         </Col>
         <Col span={24} className="mt-8">
           <span
