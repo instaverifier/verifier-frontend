@@ -1,0 +1,14 @@
+.header_main_container{
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+  
+.heading{
+    font-size: 1.375rem;
+}
+@media screen and (max-width:500px) {
+    .heading{
+        display: none !important;
+    }
+}
+}
