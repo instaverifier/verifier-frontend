@@ -44,12 +44,13 @@ const LoginSignUpModal = ({ loginModalOpen, setLoginModalOpen }) => {
       );
 
       const sessionKey = response?.data?.data?.session_key;
-      localStorage.setItem("userLogin", true);
+      localStorage.setItem("userLogin", "true");
 
       // Store the session key in a cookie with expiry of 30 days
       Cookies.set("sessionKey", sessionKey, { expires: 30 });
 
       message.success("Sign up successfully!");
+      window.location.reload();
       handleCancel();
     } catch (error) {
       message.error(error?.response?.data?.message || "Something went wrong!");

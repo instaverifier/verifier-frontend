@@ -1,0 +1,15 @@
+.marquee_row{
+    @media screen  and (max-width: 768px){
+        display: none !important;
+    }
+}
+.marquee_row_resp{
+    display: none !important;
+    @media screen  and (max-width: 768px){
+        display: flex !important;
+        margin: 20px 0 !important;
+        span{
+            font-size: 15px !important;
+        }
+    }
+}

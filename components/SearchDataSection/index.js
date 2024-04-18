@@ -1,15 +1,24 @@
-"use client";
 import { Button, Col, Input, Row, Spin, message } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useEffect, useRef, useState } from "react";
+import { debounce } from "lodash"; // Import debounce function from lodash
 
 const SearchDataSection = ({ setData }) => {
-  // const [isLogin, setIsLogin] = useState(false);
   const [loading, setLoading] = useState(false);
   const gstRef = useRef();
+  const debouncedHandleSearch = useRef(null);
 
-  const handleSearch = async () => {
+  useEffect(() => {
+    // Cleanup function to clear the debounced function on unmount or re-render
+    return () => {
+      if (debouncedHandleSearch.current) {
+        debouncedHandleSearch.current.cancel(); // Cancel the debounced function if it exists
+      }
+    };
+  }, []); // Ensure this effect runs only once on component mount
+
+  const handleSearch = () => {
     setLoading(true);
     if (localStorage.getItem("userLogin") !== "true") {
       message.error("Please login first!");
@@ -17,27 +26,33 @@ const SearchDataSection = ({ setData }) => {
       return;
     } else {
       const sessionKey = Cookies.get("sessionKey");
-      try {
-        const response = await axios.get(
-          `https://verifer-backend.onrender.com/v1/verifer/report?gst_no=${gstRef?.current?.input?.value}`,
-          {
-            headers: {
-              Sessionkey: sessionKey, // Assuming your server expects the session key in a Bearer token format
-              // Add other headers if needed
-            },
-          }
-        );
+      if (!debouncedHandleSearch.current) {
+        // Create the debounced function if it doesn't exist
+        debouncedHandleSearch.current = debounce(async () => {
+          try {
+            const response = await axios.get(
+              `https://verifer-backend.onrender.com/v1/verifer/report?gst_no=${gstRef?.current?.input?.value}`,
+              {
+                headers: {
+                  Sessionkey: sessionKey,
+                },
+              }
+            );
 
-        setData(response?.data?.data);
-      } catch (error) {
-        message.error(
-          error?.response?.data?.message || "Something went wrong!"
-        );
-      } finally {
-        setLoading(false);
+            setData(response?.data?.data);
+          } catch (error) {
+            message.error(
+              error?.response?.data?.message || "Something went wrong!"
+            );
+          } finally {
+            setLoading(false);
+          }
+        }, 2000); // Set debounce delay to 2000 milliseconds
       }
+      debouncedHandleSearch.current(); // Call the debounced function
     }
   };
+
   return (
     <div className="searchDataSectionMainContainer">
       {loading && <Spin className="center_spinner" size="large" />}
