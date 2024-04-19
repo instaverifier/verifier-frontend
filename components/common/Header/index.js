@@ -45,7 +45,7 @@ const Header = () => {
         <Col xs={12} md={8} className="d-flex align-center">
           {/* <span>LOGO</span> */}
           <Image src={Logo} alt="img" height={50} width={100} />
-          <span className="heading">Trust Checker</span>
+          <span className="heading">TRUST CHECKER</span>
         </Col>
         <Col xs={12} md={16} className="d-flex justify-end">
           {isLogin && (

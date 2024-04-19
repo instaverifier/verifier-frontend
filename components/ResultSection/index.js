@@ -4,7 +4,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { customer_reviews_mock, items } from "../../constant";
 import Image from "next/image";
 import Check from "../../public/check.webp";
-const ResultSection = ({ data }) => {
+const ResultSection = ({ data, disclaimerData }) => {
   return (
     <div className="resultSection_main_container">
       <Row className="company_info_row">
@@ -96,6 +96,15 @@ const ResultSection = ({ data }) => {
               >
                 {data ? data?.total_reports : "xxxx"}
               </Col>
+            </Row>
+            <Row className="mt-20">
+              <p
+                style={{ color: "red" }}
+                className={data ? "" : " filter_blur_effect"}
+              >
+                <span style={{ fontWeight: "700" }}>NOTE:</span>{" "}
+                {disclaimerData}
+              </p>
             </Row>
             {/* <Row className="mt-20">
               <Col xs={6} className="title">

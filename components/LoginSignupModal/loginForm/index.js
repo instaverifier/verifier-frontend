@@ -1,14 +1,21 @@
+import React from "react";
 import { Button, Col, Form, Input, Row } from "antd";
+import _ from "lodash";
 
 const LoginForm = ({ onLoginFinish, setCurrentForm }) => {
+  const debouncedLogin = _.debounce(onLoginFinish, 1000); // Adjust debounce time as needed
+
+  const handleSubmit = (values) => {
+    debouncedLogin(values);
+  };
+
   return (
     <Form
       name="basic"
       layout="vertical"
       className="login_form_main_container"
       requiredMark={false}
-      onFinish={onLoginFinish}
-      // onFinishFailed={onFinishFailed}
+      onFinish={handleSubmit}
       autoComplete="off"
     >
       <Row className="mt-20">
@@ -20,6 +27,11 @@ const LoginForm = ({ onLoginFinish, setCurrentForm }) => {
               {
                 required: true,
                 message: "Please input your GST Number!",
+              },
+              {
+                pattern:
+                  /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+                message: "Please enter a valid GST Number!",
               },
             ]}
           >
@@ -51,7 +63,7 @@ const LoginForm = ({ onLoginFinish, setCurrentForm }) => {
           </Form.Item>
         </Col>
         <Col xs={24}>
-          Dont have an account?{" "}
+          Don't have an account?{" "}
           <span
             className="pointer highlighted_text"
             onClick={() => setCurrentForm("signup")}
@@ -63,4 +75,5 @@ const LoginForm = ({ onLoginFinish, setCurrentForm }) => {
     </Form>
   );
 };
+
 export default LoginForm;

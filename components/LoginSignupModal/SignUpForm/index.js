@@ -1,14 +1,20 @@
 import React from "react";
 import { Button, Col, Form, Input, Row } from "antd";
+import _ from "lodash";
 
 const SignUpform = ({ onSignUpFinish, setCurrentForm }) => {
+  const debouncedSignUp = _.debounce(onSignUpFinish, 1000); // Debounce the sign-up function
+
+  const handleSubmit = (values) => {
+    debouncedSignUp(values); // Call the debounced sign-up function
+  };
   return (
     <Form
       name="basic"
       layout="vertical"
       className="login_form_main_container"
       requiredMark={false}
-      onFinish={onSignUpFinish}
+      onFinish={handleSubmit}
       // onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
@@ -35,6 +41,10 @@ const SignUpform = ({ onSignUpFinish, setCurrentForm }) => {
               {
                 required: true,
                 message: "Please input your mobile!",
+              },
+              {
+                pattern: /^[0-9]{10}$/,
+                message: "Please enter a valid Phone Number!",
               },
             ]}
           >
@@ -84,6 +94,11 @@ const SignUpform = ({ onSignUpFinish, setCurrentForm }) => {
               {
                 required: true,
                 message: "Please input GST number!",
+              },
+              {
+                pattern:
+                  /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+                message: "Please enter a valid GST Number!",
               },
             ]}
           >
