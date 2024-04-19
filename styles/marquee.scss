@@ -1,4 +1,6 @@
 .marquee_row{
+    position: fixed;
+    bottom: 0;
     @media screen  and (max-width: 768px){
         display: none !important;
     }

@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Trustchecker",
+  title: "Trust Checker",
   description: "Build trust here and earn on your chair",
 };
 
