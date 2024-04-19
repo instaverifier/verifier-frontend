@@ -2,15 +2,19 @@ import { Button, Col, Divider, Form, Input, Modal, Row, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { debounce } from "lodash";
 
 const ReportModal = ({ reportOpen, setReportOpen }) => {
   const [loading, setLoading] = useState(false);
   const [form] = useForm();
+  const debouncedHandleFinish = useRef(null);
+
   const handleCancel = () => {
     form.resetFields();
     setReportOpen(false);
   };
+
   const handleFinish = async (values) => {
     setLoading(true);
     const params = {
@@ -39,6 +43,12 @@ const ReportModal = ({ reportOpen, setReportOpen }) => {
       setLoading(false);
     }
   };
+
+  // Debounced version of handleFinish
+  if (!debouncedHandleFinish.current) {
+    debouncedHandleFinish.current = debounce(handleFinish, 2000);
+  }
+
   return (
     <Modal
       title="Report"
@@ -55,12 +65,12 @@ const ReportModal = ({ reportOpen, setReportOpen }) => {
         layout="vertical"
         requiredMark={false}
         name="basic"
-        onFinish={handleFinish}
+        onFinish={debouncedHandleFinish.current}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
         form={form}
       >
-        <Row>
+       <Row>
           <Col xs={24}>
             <Form.Item
               label="Name"
