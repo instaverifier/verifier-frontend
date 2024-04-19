@@ -15,7 +15,8 @@ const ReportModal = ({ reportOpen, setReportOpen }) => {
     setLoading(true);
     const params = {
       ...values,
-      ["isBad"]: 1,
+      ["amount"]: parseInt(values["amount"]),
+      ["is_bad"]: 1,
       ["category_type"]: "Type A",
     };
 
@@ -45,7 +46,7 @@ const ReportModal = ({ reportOpen, setReportOpen }) => {
       onCancel={handleCancel}
       footer={null}
     >
-      <p style={{ marginBottom: "10px" }}>
+      <p style={{ marginBottom: "10px", color: "red" }}>
         We encourage responsible reporting as users are solely responsible for
         their actions.
       </p>
@@ -111,6 +112,11 @@ const ReportModal = ({ reportOpen, setReportOpen }) => {
                   required: true,
                   message: "Please input GST number!",
                 },
+                {
+                  pattern:
+                    /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+                  message: "Please enter a valid GST Number!",
+                },
               ]}
             >
               <Input placeholder="Enter GST number" />
@@ -124,6 +130,10 @@ const ReportModal = ({ reportOpen, setReportOpen }) => {
                 {
                   required: true,
                   message: "Please input mobile number!",
+                },
+                {
+                  pattern: /^[0-9]{10}$/,
+                  message: "Please enter a valid Mobile Number!",
                 },
               ]}
             >
@@ -139,6 +149,10 @@ const ReportModal = ({ reportOpen, setReportOpen }) => {
                   required: true,
                   message: "Please input amount!",
                 },
+                {
+                  pattern: /^(?=.*[1-9])\d*(?:\.\d+)?$/,
+                  message: "Please enter a amount greater than 0!",
+                },
               ]}
             >
               <Input placeholder="Enter amount" />
@@ -152,6 +166,10 @@ const ReportModal = ({ reportOpen, setReportOpen }) => {
                 {
                   required: true,
                   message: "Please input url!",
+                },
+                {
+                  pattern: /\b(?:https?|ftp):\/\/[-A-Za-z0-9+&@#\/%?=~_|!:,.;]*[-A-Za-z0-9+&@#\/%=~_|]/,
+                  message: "Please enter a valid url!",
                 },
               ]}
             >
